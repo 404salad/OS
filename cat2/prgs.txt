@@ -1,0 +1,13 @@
+-> struct alteration for 3 processes
+-> petersons solution
+-> bakery algorithm code 
+-> the bank race condition from book
+-> sleeping barber problem from vit helper f2
+-> thirsty person problem from vit helper a2
+-> producer consumer and readers writers problem using fork and semaphores
+-> psl psuedocode
+-> lab reports
+-> philosopher problem 
+-> numerical place a page, replace a page, how much time conserved 
+-> hit ratio calculation
+

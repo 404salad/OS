@@ -1,0 +1,21 @@
+\documentclass{article}    
+\usepackage{graphicx}
+\begin{document}
+22BPS1059\\
+part 1\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig1.png}\end{figure}\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig2.png}\end{figure}\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig3.png}\end{figure}\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig4.png}\end{figure}\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig5.png}\end{figure}\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig6.png}\end{figure}\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig7.png}\end{figure}\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig8.png}\end{figure}\\
+part 2\\
+\begin{figure}[H]\includegraphics[width=\linewidth]{fig9.png}\end{figure}\\
+part 3\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig10.png}\end{figure}\\
+\begin{figure}[h]\includegraphics[width=\linewidth]{fig11.png}\end{figure}\\
+
+\end{document}                
+
