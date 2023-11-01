@@ -1,110 +1,113 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 5
+void display(int** arr, int* mems) {
+    printf("\ncurrent memory \n");
+    for(int i = 0; i<MAX; i++) {
+        printf("block %d:",i);
+        for(int j = 0; j<mems[i];j++) {
+            printf("%d", *arr[i]);
+            arr[i]++;
+        }printf("\n");
 
-void display(int *arr[MAX], int mems[MAX]) {
-    printf("Current memory\n");
-    for (int i = 0; i < MAX; i++) {
-        printf("Block %d: ", i);
-        for (int j = 0; j < mems[i]; j++) {
-            printf("%d ", arr[i][j]);
+        for(int j = 0; j<mems[i];j++) {
+            *arr[i]--; // reseting the pointer
         }
-        printf("\n");
     }
 }
-int firstFit(int *arr[MAX], int mems[MAX], int request) {
-    printf("Allocating %d using First Fit\n", request);
-    for (int i = 0; i < MAX; i++) {
-        if (mems[i] >= request) {
-            for (int j = 0; j < request; j++) {
-                arr[i][j] = 1;
-            }
-            return i;
+ 
+int worstfit(int** arr, int* mems, int request) {
+    printf("\nallocating %d, using worst fit\n", request);
+    int mindex = 0; 
+    for(int i = 0; i<MAX; i++) {
+        printf("mindex is %d\n", mindex);
+        if(mems[i]<request) continue; // cause not possible
+        printf("%d, %d", mems[i]-request, mems[mindex]-request);
+        if(mems[i]> mems[mindex]) {
+            mindex = i;
+            printf("moindex is %d", mindex);
         }
+       
     }
-    return -1; // Allocation failed
-}
-int bestFit(int *arr[MAX], int mems[MAX], int request) {
-    printf("Allocating %d using Best Fit\n", request);
-    int mindex = -1;
-    for (int i = 0; i < MAX; i++) {
-        if (mems[i] >= request) {
-            if (mindex == -1 || mems[i] < mems[mindex]) {
-                mindex = i;
-            }
-        }
-    }
-    if (mindex != -1) {
-        for (int j = 0; j < request; j++) {
-            arr[mindex][j] = 1;
-        }
-        return mindex;
-    }
-    return -1; // Allocation failed
-}
 
-int worstFit(int *arr[MAX], int mems[MAX], int request) {
-    printf("Allocating %d using Worst Fit\n", request);
-    int mindex = -1;
-    for (int i = 0; i < MAX; i++) {
-        if (mems[i] >= request) {
-            if (mindex == -1 || mems[i] > mems[mindex]) {
-                mindex = i;
-            }
+    if(*arr[mindex] == 0) { // checking if it is unallocated
+        for(int j = 0; j<request; j++) {
+            *arr[mindex] =1;
+            *arr[mindex]++;
         }
-    }
-    if (mindex != -1) {
-        for (int j = 0; j < request; j++) {
-            arr[mindex][j] = 1;
+        for(int j = 0; j<request;j++) {
+            *arr[mindex]--; // reseting the pointer
         }
-        return mindex;
+        return 0;
     }
-    return -1; // Allocation failed
 }
 
+int bestfit(int** arr, int* mems, int request) {
+    printf("\nallocating %d, using best fit\n", request);
+    int perfindex = 0; 
+    for(int i = 0; i<MAX; i++) {
+	if(mems[i]==request){
+		perfindex = i;
+		break;
+	};
+    }
+
+    if(*arr[perfindex] == 0) { // checking if it is unallocated
+        for(int j = 0; j<request; j++) {
+            *arr[perfindex] =1;
+            *arr[perfindex]++;
+        }
+        for(int j = 0; j<request;j++) {
+            *arr[perfindex]--; // reseting the pointer
+        }
+        return 0;
+    }
+}
+
+
+int firstfit(int** arr, int* mems, int request) {
+    printf("\nallocating %d, using first fit\n", request);
+    int perfindex = 0; 
+    for(int i = 0; i<MAX; i++) {
+	if(mems[i]>=request){
+		perfindex = i;
+		break;
+	};
+    }
+
+    if(*arr[perfindex] == 0) { // checking if it is unallocated
+        for(int j = 0; j<request; j++) {
+            *arr[perfindex] =1;
+            *arr[perfindex]++;
+        }
+        for(int j = 0; j<request;j++) {
+            *arr[perfindex]--; // reseting the pointer
+        }
+        return 0;
+    }
+}
 int main() {
-    int *arr[MAX] = {NULL};
-    int mems[MAX] = {0};
+    int *arr[MAX] = {};
+    int mems[MAX] = {};
 
-    // Allocating memory
-    for (int i = 0; i < MAX; i++) {
-        int mem = rand() % 10 + 1;
+    // allocating memory
+    for(int i = 0; i<MAX; i++) {
+        int mem = rand()%10+1;
         mems[i] = mem;
-        printf("Allocating %d mem\n", mem);
-        arr[i] = calloc(mem, sizeof(int));
+        printf("allocating %d mem\n",mem);
+        arr[i] = calloc(mem, sizeof(int));     
     }
-
-    // Displaying memory
+    
+    // displaying memory
+    display(arr, mems);
+    worstfit(arr, mems, 5);
     display(arr, mems);
 
-    int firstFitBlock = firstFit(arr, mems, 5);
-    if (firstFitBlock != -1) {
-        printf("Allocated in Block %d using First Fit\n", firstFitBlock);
-    } else {
-        printf("First Fit allocation failed\n");
-    }
-
-    int bestFitBlock = bestFit(arr, mems, 5);
-    if (bestFitBlock != -1) {
-        printf("Allocated in Block %d using Best Fit\n", bestFitBlock);
-    } else {
-        printf("Best Fit allocation failed\n");
-    }
-
-    int worstFitBlock = worstFit(arr, mems, 5);
-    if (worstFitBlock != -1) {
-        printf("Allocated in Block %d using Worst Fit\n", worstFitBlock);
-    } else {
-        printf("Worst Fit allocation failed\n");
-    }
-
+    display(arr, mems);
+    bestfit(arr, mems, 6);
     display(arr, mems);
 
-    // Free allocated memory
-    for (int i = 0; i < MAX; i++) {
-        free(arr[i]);
-    }
-
-    return 0;
+    display(arr, mems);
+    firstfit(arr,mems, 4);
+    display(arr, mems);
 }
-
