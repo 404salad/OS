@@ -1,0 +1,2 @@
+execlp("cat", "cat", "file.txt", NULL);
+
