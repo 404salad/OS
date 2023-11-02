@@ -8,14 +8,16 @@ int main() {
     pid_t child = fork();
 
     if(child == 0 ) { // child 
-       execlp("cat","cat","file.txt",NULL);
-       return 0;
+       execlp("./lock.sh","./lock.sh",NULL);
+       exit(0);
     }
     else if(child > 0) { // parent
-        return 0;
+       execlp("./lock.sh","./lock.sh",NULL);
+       exit(0);
     }
     else {
         perror("fork error");
+        exit(0);
     }
     return 0;
 }

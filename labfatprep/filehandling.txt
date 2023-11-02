@@ -1,0 +1,15 @@
+// NEVER MIX READ AND WRITE TOGETHER  always close
+// dont do research again just follow this
+
+FILE *fptr ; 
+
+// writing
+fptr = fopen("fileName.txt","a+");
+fprintf(fptr, "next baby you got me i got a bad boy %d",2);
+fclose(fptr);
+
+// reading
+fptr = fopen("data.txt", "r");
+char data[13];
+char* a = fgets(data,13,fptr);
+
