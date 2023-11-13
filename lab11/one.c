@@ -19,5 +19,6 @@ int main() {
         perror("fork error");
         exit(0);
     }
+    wait(NULL);
     return 0;
 }

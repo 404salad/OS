@@ -12,7 +12,7 @@ while [[ $progress -lt 101 ]]; do
 done
 echo ""
 
-value=$((value+$1))
+value=$((value + $1))
 echo "Write new balance ($value) back to $file." 
 echo $value > "$file"
 echo "Done."
