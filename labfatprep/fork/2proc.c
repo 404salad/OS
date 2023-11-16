@@ -16,7 +16,7 @@ int main() {
                 printf("childs pid is %d\n", p1);
                 break;
         }
-        wait(NULL);
+        wait(NULL); //important
         pid_t p2 = fork();
         switch(p2) {
             case -1:
