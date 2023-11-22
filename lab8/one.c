@@ -43,6 +43,7 @@ int main() {
         printf("Data written to shared memory: %s\n", shared_memory);
     }
 
+    wait(NULL);
     return 0;
 }
 

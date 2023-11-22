@@ -5,12 +5,12 @@
 #include <sys/types.h>
 
 int main() {
-    int fd[2];
     pid_t childpid;
     char* string = "nobara";
     char readbuffer[20]; // Define a buffer for reading data
     ssize_t nbytes;     // Use ssize_t for read/write return values
     
+    int fd[2];
     if (pipe(fd) == -1) {
         perror("Pipe");
         exit(1);
